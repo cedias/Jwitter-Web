@@ -1,28 +1,33 @@
 
 
-var env;
+var env = new Environnement();
 
-//var resp = '{"id":2,"login":"marwan","key":"421l073hpv1bvUQi0k41U064v6nxo0rH"}';
 
-//var result = JSON.parse(resp);
-//var user = new User(result.login,result.id,result.key);
 
-//console.log(user);
-Jwitter.login("charles","3060501", function(resp){console.log(resp);});
+ $("#login").on("submit", function(){
+ 	var login = $("#login_value").val();
+ 	var password = $("#password_value").val();
 
-// $("#submit_login").on("click", function(){
-// 	var login = $("#value_login").val();
-// 	var password = $("#value_password").val();
-// 	console.log(login + "   " + password);
-// 	alert(login);
-// 	alert(password);
+ 	Jwitter.login(login, password, function(resp){
 
-// 	var callback = function(resp){
-// 		var user = JSON.parse(resp);
-// 		env = new Environnement(user);
-// 	};
+ 		console.log(resp);
 
-// 	Jwitter.login(login, password, callback);
+ 		if(!resp.error_code){
+ 			var user = new User(resp.login,resp.id,resp.key,false);
+ 			env = new Environnement(user);
+ 		}
+ 		else
+ 			alert(resp.message);
 
-// });
+ 	});
 
+ 	return false; // deactivate page refresh 
+ });
+
+
+ $("#logout").on("submit", function(){
+
+ 	env = new Environnement();
+
+ 	return false; // deactivate page refresh 
+ });

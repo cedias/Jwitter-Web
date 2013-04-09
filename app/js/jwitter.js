@@ -22,7 +22,7 @@ Jwitter._get = function(url,callback){
 	var jqxhr = $.ajax(url)
 	
     .done(function(resp) {
-	    console.log(resp);
+	    resp = JSON.parse(resp);
 	     callback(resp);
 	 })
 
