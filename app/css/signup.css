@@ -1,5 +1,101 @@
+*
+{
+/*border: 1px solid black;
+*/
+	margin:0px;
+ 	font-family: 'Myriad-Pro', 'Myriad', helvetica, arial, sans-serif;
+ 	font-size: 13px; 
+
+
+}
+
+a {
+	color: #00B4CC;
+}
+
 .signup_field
 {
 	display:block;
-	height:25px;	
+	height:25px;
+	width:50%;
+	text-align: center;
+	display: block; 
+	margin: 0 auto;
 }
+
+
+body {
+
+
+background: #6e7676; /* Old browsers */
+background: -moz-linear-gradient(top, #6e7676 0%, #4ce9fe 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6e7676), color-stop(100%,#4ce9fe)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #6e7676 0%,#4ce9fe 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #6e7676 0%,#4ce9fe 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #6e7676 0%,#4ce9fe 100%); /* IE10+ */
+background: linear-gradient(to bottom, #6e7676 0%,#4ce9fe 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e7676', endColorstr='#4ce9fe',GradientType=0 ); /* IE6-9 */
+}
+
+/*HEADER*/
+
+#header{
+	height: 80px;
+	padding-top: 5px;
+	background-color: #343838;
+	color: #00DFFC;
+	border-bottom: 7px groove #005F6B;
+	min-width: 800px;
+}
+
+#header > * {
+	display: inline-block;
+	vertical-align:top;
+}
+
+#header > h1{
+	text-align: center;
+	width: 20%;
+	font-size: 50px;
+    font-family: 'Myriad-Pro', 'Myriad', helvetica, arial, sans-serif;  
+    text-shadow: 2px 3px 3px #292929;
+    margin-top: 10px;
+
+}
+
+
+
+
+#form_container {
+	width:50%;
+	margin:auto;
+	margin-top: 15px;
+	min-width: 279px;
+}
+
+#signup {
+	width:50%;
+	margin:auto;
+	margin-top: 15px;
+	min-width: 279px;
+	text-align: center; 
+
+}
+
+/*FOOTER*/
+
+#footer{
+	height: 150px;
+	margin-top: 25px;
+	padding-top: 5px;
+	background-color: #343838;
+	color: #00DFFC;
+	border-top: 7px solid #000000;
+}
+
+ #footer > p 
+ {
+ 	text-align: center;
+ }
+
+

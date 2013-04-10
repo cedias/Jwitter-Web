@@ -6,12 +6,40 @@
 	<link rel="stylesheet" href="css/signup.css" />
 </head>
 <body>
-	<form >
-		<input class="signup_field" type="text" placeholder="First Name" />
-		<input class="signup_field" type="text" placeholder="Last Name" />
-		<input class="signup_field" type="text" placeholder="Login" />
-		<input class="signup_field" type="text" placeholder="Password">
-		<input class="signup_field" type="text" placeholder="Password">
-		<input  type="submit">
-	</form>
+
+	<div id="header">
+		<h1> Jwitter </h1>
+		
+	</div>
+
+	<div id="container">
+		<div id="form_container" class="content_background">	
+			<form action="#" id="signup" >
+				<input class="signup_field" type="text" placeholder="First Name" id="first_name" />
+				<input class="signup_field" type="text" placeholder="Last Name" id="last_name" />
+				<input class="signup_field" type="text" placeholder="Login" id="login" />
+				<input class="signup_field" type="text" placeholder="Password" id="password"/>
+				<input class="signup_field" type="text" placeholder="Password" id="password2"/>
+				<input  type="submit" id="submit_signup"/>
+			</form>
+		</div> 
+	</div>	
+
+	<div id="footer">
+		<p><b>Jwitter</b> - Twitter clone using Java</p>
+			<p>Charles-Emmanuel Dias ~ Marwan Ghanem</p>
+		<h2>Tools</h2>
+		<ul>
+			<li><a href="http://cedias.github.com/Jwitter">Api</a></li>
+			<li><a href="http://github.com/cedias/Jwitter">Source</a></li>
+		</ul>
+	</div>
+
+	<script type="text/javascript" src="js/lib/jquery.js"></script>
+	<script type="text/javascript" src="js/lib/handlebars.js"></script>
+	<script type="text/javascript" src="js/jwitter.js"></script>
+	<script type="text/javascript" src="js/core_objects.js"></script>
+	<script type="text/javascript" src="js/appSignup.js"></script>
+	
 </body>
+</html>
