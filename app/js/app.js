@@ -1,7 +1,8 @@
 
+$(function() {
+
 
 var env = new Environnement();
-
 
 
  $("#login").on("submit", function(){
@@ -15,6 +16,9 @@ var env = new Environnement();
  		if(!resp.error_code){
  			var user = new User(resp.login,resp.id,resp.key,false);
  			env = new Environnement(user);
+
+ 			//setting cookie
+ 			createCookie('JwitterUser',user,7);
  		}
  		else
  			alert(resp.message);
@@ -27,7 +31,27 @@ var env = new Environnement();
 
  $("#logout").on("submit", function(){
 
+ 	eraseCookie('JwitterUser');
  	env = new Environnement();
+
 
  	return false; // deactivate page refresh 
  });
+
+ $("#message_form").on("submit",function(){
+	
+ 	var key = env.getKey();
+ 	var message = $("#add_message");
+ 	console.log(message); //try text
+ 	return false;
+ 	// Jwitter.post(key,message,function(resp){
+
+ 	// 	if(resp.error_code){
+ 	// 		alert(resp.message);
+ 	// 	}
+ 	// });
+
+
+ });
+
+});

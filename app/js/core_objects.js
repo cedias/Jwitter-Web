@@ -4,6 +4,7 @@
 function Environnement(user){
 	
 	this.users = [];
+	this.messages = [];
 
 	if(user){
 		this._connectContext();
@@ -11,7 +12,24 @@ function Environnement(user){
 	}
 	else
 		this._disconnectContext();
+
+	this._init();
 }
+
+Environnement.prototype._init = function() {
+
+	Jwitter.listAll(function(resp){
+		var template = Handlebars.compile($("#message_template").html());
+		var box = $("#message_list");
+		var messages = resp.messages;
+		
+
+		for(var i=0;i<messages.length;i++){
+			box.prepend(template(messages[i]));	
+		}
+	});
+
+};
 
 Environnement.prototype.switchContext = function(){
 	
@@ -59,17 +77,21 @@ function User(login,id,key,contact){
 	this.contact = contact;
 }
 
+User.prototype.getKey = function() {
+	return this.key;
+};
 
 
 
 /*Message*/
 
-function Message(id,author,text,data,score){
+function Message(id,author,text,data,score,template){
 	this.id = id;
 	this.author = author;
 	this.text = text;
 	this.data = data;
 	this.score = score;
+	this.template = template;
 }
 
 
@@ -84,4 +106,5 @@ function RechercheMessage(resultats,recherche,contact_only,author,data){
 	this.author = author;
 	this.data = data;
 }
+
 

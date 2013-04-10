@@ -18,6 +18,17 @@ Jwitter.logout = function(key,callback)
 
 	};
 
+Jwitter.listAll = function(callback){
+	var url = baseUrl+"/message/list";
+	Jwitter._get(url,callback);
+}
+
+Jwitter.post = function(key,message,callback){
+	
+	var url = baseUrl+"/message/post?key="+key+"&msg="+message;
+	Jwitter._get(url,callback);
+}
+
 Jwitter._get = function(url,callback){
 	var jqxhr = $.ajax(url)
 	
