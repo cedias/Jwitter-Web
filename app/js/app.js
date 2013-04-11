@@ -5,9 +5,25 @@ $(function() {
 	/*----------------
 	* Page  Variables |
 	* ---------------*/
+	var env;
 
-	var env = new Environnement();
 
+
+	/*------------------Page Initialisation -------------------------*/
+
+		cookie = readCookie("JwitterAuth");
+
+		console.log(cookie);
+		if(cookie)
+		{
+			var parsed = JSON.parse(cookie);
+			var user = new User(parsed.login,parsed.id,parsed.key,false);
+	 			env = new Environnement(user);
+		}
+		else
+		{
+			env = new Environnement();	
+		}
 
 
 	/*------------------ * Events Bindings * -----------------------*/
@@ -22,9 +38,11 @@ $(function() {
 
 	 	Jwitter.login(login, password, function(resp){
 
+
 	 		if(!resp.error_code){
 	 			var user = new User(resp.login,resp.id,resp.key,false);
 	 			env = new Environnement(user);
+	 			createCookie("JwitterAuth", JSON.stringify(user) , 1);
 	 		}
 	 		else
 	 		{
@@ -42,6 +60,7 @@ $(function() {
 	 $("#logout").on("submit", function(){
 
 	 	env = new Environnement();
+	 	eraseCookie("JwitterAuth");
 	 	return false; // deactivate page refresh 
 	 });
 
@@ -56,7 +75,7 @@ $(function() {
 	 });
 
 	 /*------------Click go(search) action------------*/
-	 
+
 	  $("#search_form").on("submit",function(){
 
 	 	alert('not implemented');
