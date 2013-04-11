@@ -12,8 +12,8 @@ $(function() {
 	/*------------------Page Initialisation -------------------------*/
 
 		cookie = readCookie("JwitterAuth");
+		$("#error_modal").hide();
 
-		console.log(cookie);
 		if(cookie)
 		{
 			var parsed = JSON.parse(cookie);
@@ -25,6 +25,20 @@ $(function() {
 			env = new Environnement();	
 		}
 
+	/*--------------------Utilities----------------------------------*/
+
+		function showError(errorMessage) {
+			var modal = $("#error_modal");
+			modal.html("<p>"+errorMessage+"</p>");
+
+			modal.fadeIn('fast', function(){
+				
+				setTimeout(function() {
+      				modal.fadeOut(2500);
+				}, 1000);
+
+			});
+		}
 
 	/*------------------ * Events Bindings * -----------------------*/
 
@@ -36,8 +50,13 @@ $(function() {
 	 	var login = $("#login_value").val();
 	 	var password = $("#password_value").val();
 
-	 	Jwitter.login(login, password, function(resp){
+	 	//login & password != "
+	 	if(login === "" || password === ""){
+	 		showError("Please enter some credentials");
+	 		return false;
+	 	}
 
+	 	Jwitter.login(login, password, function(resp){
 
 	 		if(!resp.error_code){
 	 			var user = new User(resp.login,resp.id,resp.key,false);
@@ -46,7 +65,7 @@ $(function() {
 	 		}
 	 		else
 	 		{
-	 			alert(resp.message);
+	 			showError(resp.message);
 	 		}
 	 	});
 

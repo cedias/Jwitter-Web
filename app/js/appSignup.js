@@ -1,6 +1,24 @@
  $(function(){
 
 
+ 	$("#error_modal").hide();
+
+ /*--------------------Utilities----------------------------------*/
+
+		function showError(errorMessage) {
+			var modal = $("#error_modal");
+			modal.html("<p>"+errorMessage+"</p>");
+
+			modal.fadeIn('fast', function(){
+				
+				setTimeout(function() {
+      				modal.fadeOut(2500);
+				}, 1000);
+
+			});
+		}
+
+/*------------------ * Events Bindings * -----------------------*/
 
 
 	$("#signup").on("submit", function(){
@@ -9,12 +27,18 @@
 		var login = $("#login").val();
 		var password = $("#password").val();
 
+		if(firstName === "" || lastName === "" || login === "" || password === "")
+		{
+			showError("Please fill all the fields");
+			return false;
+		}
+
 
 		Jwitter.signup(firstName,lastName,login,password,function(resp){
 			console.log(resp);
 
 			if(resp.error_code){
-				alert(resp.message);
+				showError(resp.message);
 			}
 			else
 			{

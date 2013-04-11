@@ -65,6 +65,31 @@ input[type="checkbox"]:hover, label:hover {
   cursor: pointer;
 }
 
+#error_modal{
+  color: black;
+  font-weight: bolder;
+  font-size: 30px;
+  padding :10px;
+  position: fixed;
+  right: 100px;
+  top: 100px;
+  width: 250px;
+  border-radius: 10px 10px 10px;
+  border: 2px solid red;
+  background-color: #D67474;
 
+    -moz-box-shadow: 2px 2px 10px #343838;
+  -webkit-box-shadow: 2px 2px 10px #343838;
+  -o-box-shadow: 2px 2px 2px #343838;
+  box-shadow: 2px 2px 10px #343838;
+
+}
+
+#error_modal > p {
+font-weight: bolder;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: center;
+}
 
 
