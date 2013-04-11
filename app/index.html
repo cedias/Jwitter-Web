@@ -2,8 +2,9 @@
 <html>
 <head>
 	<title> Jwitter</title>
-	<link rel="stylesheet" href="css/form.css" />
+	
 	<link rel="stylesheet" href="css/index.css" />
+	<link rel="stylesheet" href="css/form.css" />
 </head>
 <body>
 
@@ -33,12 +34,16 @@
 			<form action="#" id="logout">
 				<input type="submit" value="logout" id="submit_logout" />
 			</form>
-			
 		</div> 
 
+
 	</div>
+	<div id="error_modal">
+		</div>
+
 
 	<div id="container">
+
 		<div id="content_form" >
 			<form id="message_form" action="#" >
 				<textarea placeholder="What's on your mind ?" id="add_message" maxlength="150" wrap="hard"></textarea>
@@ -46,6 +51,7 @@
 				<input type="submit" value="post" id="post_message" />
 			</form>
 		</div>
+
 
 		<div id="content_message" class="content_background">
 			<div id="messages">
