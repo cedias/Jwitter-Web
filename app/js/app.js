@@ -53,5 +53,10 @@ var env = new Environnement();
 
 
  });
-
 });
+
+
+function newPopup(url) {
+	popupWindow = window.open(
+		url,'popUpWindow','height=400,width=380,left=10,top=10,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no,center=1')
+}

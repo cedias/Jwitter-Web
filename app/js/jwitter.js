@@ -29,6 +29,11 @@ Jwitter.post = function(key,message,callback){
 	Jwitter._get(url,callback);
 }
 
+Jwitter.signup = function(firstName,lastName,login,password,callback){
+	var url = baseUrl+"/user/new?login="+login+"&pass="+password+"&fname="+firstName+"&lname="+lastName;
+	Jwitter._get(url,callback);
+}
+
 Jwitter._get = function(url,callback){
 	var jqxhr = $.ajax(url)
 	
@@ -37,7 +42,10 @@ Jwitter._get = function(url,callback){
 	     callback(resp);
 	 })
 
-    .fail(function() { alert("error in request "+ url); })
+    .fail(function(resp) {
+     console.log(resp);
+     alert(resp); 
+    })
 }
 
 })(window);
