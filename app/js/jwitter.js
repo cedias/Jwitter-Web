@@ -42,7 +42,10 @@ Jwitter._get = function(url,callback){
 	     callback(resp);
 	 })
 
-    .fail(function() { alert("error in request "+ url); })
+    .fail(function(resp) {
+     console.log(resp);
+     alert(resp); 
+    })
 }
 
 })(window);

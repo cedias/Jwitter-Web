@@ -13,14 +13,26 @@ a {
 	color: #00B4CC;
 }
 
+input {
+
+	margin-bottom: 15px;
+}
+
 .signup_field
 {
 	display:block;
 	height:25px;
-	width:50%;
+
 	text-align: center;
 	display: block; 
-	margin: 0 auto;
+	margin: 5px auto;
+}
+
+h2{
+	color: #00B4CC;
+	font-size: 25px;
+	text-shadow: 2px 3px 3px #292929;
+	margin-bottom: 20px;
 }
 
 
@@ -53,40 +65,56 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e7676', end
 	vertical-align:top;
 }
 
-#header > h1{
+#header > h1, h1 > a{
 	text-align: center;
 	width: 20%;
 	font-size: 50px;
     font-family: 'Myriad-Pro', 'Myriad', helvetica, arial, sans-serif;  
     text-shadow: 2px 3px 3px #292929;
     margin-top: 10px;
-
+    text-decoration: none;
 }
 
 
 
 
 #form_container {
-	width:50%;
+
+	
+	padding: 5px;
+	width:280px;
 	margin:auto;
-	margin-top: 15px;
-	min-width: 279px;
+	margin-top: 100px;
+	margin-bottom: 50px;
+		background-color: #343838;
+	border-radius: 3px 3px 3px;
+
+	-moz-box-shadow: 0px 0px 50px #343838;
+	-webkit-box-shadow: 0px 0px 50px #343838;
+	-o-box-shadow: 0px 0px 50px #343838;
+	box-shadow: 0px 0px 50px #343838;
+
 }
 
 #signup {
-	width:50%;
 	margin:auto;
 	margin-top: 15px;
-	min-width: 279px;
+	min-width: 100px;
+	max-width: 200px;
 	text-align: center; 
 
+}
+
+#submit_signup {
+	margin-top: 10px;
+	width:50%;
 }
 
 /*FOOTER*/
 
 #footer{
 	height: 150px;
-	margin-top: 25px;
+	margin-top: 22%;
 	padding-top: 5px;
 	background-color: #343838;
 	color: #00DFFC;
