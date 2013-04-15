@@ -66,11 +66,13 @@ Environnement.prototype._prependMsg = function(messages){
 		var box = $("#message_list");
 
 		if(messages._id !== undefined){
+			this.messages.push(messages);
 			box.prepend(template(messages));
 		}
 		else /* if messages is a single object & not an array*/
 		{
 			for(var i=messages.length-1;i>=0;i--){
+				this.messages.push(messages[i]);
 				box.prepend(template(messages[i]));	
 			}
 		}

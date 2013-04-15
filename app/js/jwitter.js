@@ -44,12 +44,13 @@ Jwitter._get = function(url,callback){
 	
     .done(function(resp) {
 	    resp = JSON.parse(resp);
-	     callback(resp);
+
+	    if(callback !== undefined)
+	    	callback(resp);
 	 })
 
     .fail(function(resp) {
-     console.log(resp);
-     alert(resp); 
+    console.log("failed: "+url+ " || url: "+resp);
     })
 }
 

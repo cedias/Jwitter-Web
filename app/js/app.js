@@ -1,11 +1,11 @@
-
+var env; //for debug purposes
 
 $(function() {
 
 	/*----------------
 	* Page  Variables |
 	* ---------------*/
-	var env;
+	var user;
 
 
 
@@ -17,7 +17,7 @@ $(function() {
 		if(cookie)
 		{
 			var parsed = JSON.parse(cookie);
-			var user = new User(parsed.login,parsed.id,parsed.key,false);
+				user = new User(parsed.login,parsed.id,parsed.key,false);
 	 			env = new Environnement(user);
 		}
 		else
@@ -60,7 +60,7 @@ $(function() {
 	 	Jwitter.login(login, password, function(resp){
 
 	 		if(!resp.error_code){
-	 			var user = new User(resp.login,resp.id,resp.key,false);
+	 			user = new User(resp.login,resp.id,resp.key,false);
 	 			env.switchContext(user);
 	 			createCookie("JwitterAuth", JSON.stringify(user) , 1);
 	 		}
@@ -79,6 +79,7 @@ $(function() {
 
 	 $("#logout").on("submit", function(){
 
+	 	Jwitter.logout(user.key);
 	 	env.switchContext();
 	 	eraseCookie("JwitterAuth");
 	 	return false; // deactivate page refresh 
