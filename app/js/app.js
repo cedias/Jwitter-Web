@@ -90,8 +90,19 @@ $(function() {
 	 /*-------------Click post action--------------*/
 
 	 $("#message_form").on("submit",function(){
+	 	var message = $("#add_message").val();
+	 	
+	 	Jwitter.post(user.key,message,function(resp){
 
-	 	alert('not implemented');
+	 		if (!resp.error_code) {
+	 			env.refresh();
+	 		}
+	 		else
+	 		{
+	 			showError(resp.message);
+	 		}
+	 	});
+
 	 	return false; // deactivate page refresh 
 	 });
 
