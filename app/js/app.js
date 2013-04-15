@@ -1,11 +1,11 @@
 
+var env;
 $(function() {
-
 
 	/*----------------
 	* Page  Variables |
 	* ---------------*/
-	var env;
+	
 
 
 
@@ -24,6 +24,7 @@ $(function() {
 		{
 			env = new Environnement();	
 		}
+			
 
 	/*--------------------Utilities----------------------------------*/
 

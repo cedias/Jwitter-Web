@@ -16,19 +16,23 @@ function Environnement(user){
 	this._init();
 }
 
-Environnement.prototype._init = function() {
 
-	Jwitter.listAll(function(resp){
-		var template = Handlebars.compile($("#message_template").html());
-		var box = $("#message_list");
-		var messages = resp.messages;
-		
-
-		for(var i=0;i<messages.length;i++){
-			box.prepend(template(messages[i]));	
-		}
-	});
-
+Environnement.prototype.refresh = function() {
+	
+	var that = this;
+	console.log("refreshing");
+	console.log(this.lastReceived);
+	
+	if(this.lastReceived != undefined){
+		Jwitter.listTo(this.lastReceived,function(resp){
+			console.log(resp);
+			console.log(jQuery.isEmptyObject(resp));
+			if(jQuery.isEmptyObject(resp) === false){
+				that._prependMsg(resp.messages);
+				that.lastReceived(resp.messages[0])
+			}
+		});
+	}
 };
 
 Environnement.prototype.switchContext = function(){
@@ -39,6 +43,32 @@ Environnement.prototype.switchContext = function(){
 	else if(this.context === "disconnected"){
 		this._connectContext();
 	}
+};
+
+Environnement.prototype._init = function() {
+	var that = this;
+
+	Jwitter.listAll(function(resp){
+		that._prependMsg(resp.messages);
+		that.lastReceived = resp.messages[0]._id;
+		
+		that.refresher = setInterval(function(){
+		that.refresh();
+		},30000);
+
+	});
+	
+};
+
+
+Environnement.prototype._prependMsg = function(messages){
+		var template = Handlebars.compile($("#message_template").html());
+		var box = $("#message_list");
+		console.log(messages);
+		for(var i=messages.length-1;i>=0;i--){ //pas forcement un tableau
+			console.log(i);
+			box.prepend(template(messages[i]));	
+		}
 };
 
 
