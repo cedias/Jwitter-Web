@@ -23,6 +23,11 @@ Jwitter.listAll = function(callback){
 	Jwitter._get(url,callback);
 }
 
+Jwitter.listTo = function(msgId, callback){
+	var url = baseUrl+"/message/list?mid="+msgId;
+	Jwitter._get(url,callback);
+}
+
 Jwitter.post = function(key,message,callback){
 	
 	var url = baseUrl+"/message/post?key="+key+"&msg="+message;
@@ -39,12 +44,13 @@ Jwitter._get = function(url,callback){
 	
     .done(function(resp) {
 	    resp = JSON.parse(resp);
-	     callback(resp);
+
+	    if(callback !== undefined)
+	    	callback(resp);
 	 })
 
     .fail(function(resp) {
-     console.log(resp);
-     alert(resp); 
+    console.log("failed: "+url+ " || url: "+resp);
     })
 }
 

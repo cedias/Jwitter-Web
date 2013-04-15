@@ -16,34 +16,72 @@ function Environnement(user){
 	this._init();
 }
 
-Environnement.prototype._init = function() {
 
-	Jwitter.listAll(function(resp){
-		var template = Handlebars.compile($("#message_template").html());
-		var box = $("#message_list");
-		var messages = resp.messages;
-		
+Environnement.prototype.refresh = function() {
+	var that = this;
+	
+	if(this.lastReceived != undefined){
+		Jwitter.listTo(this.lastReceived,function(resp){
 
-		for(var i=0;i<messages.length;i++){
-			box.prepend(template(messages[i]));	
-		}
-	});
+			if(jQuery.isEmptyObject(resp) === false){
+				that._prependMsg(resp.messages);
 
+				if(resp.messages[0] !== undefined)
+					that.lastReceived = resp.messages[0]._id;
+				else
+					that.lastReceived = resp.messages._id;
+			}
+		});
+	}
 };
 
-Environnement.prototype.switchContext = function(){
+Environnement.prototype.switchContext = function(user){
 	
 	if(this.context ===  "connected"){
 		this._disconnectContext();
 	}
 	else if(this.context === "disconnected"){
-		this._connectContext();
+		this._connectContext(user);
 	}
+};
+
+Environnement.prototype._init = function() {
+	var that = this;
+
+	Jwitter.listAll(function(resp){
+		that._prependMsg(resp.messages);
+		that.lastReceived = resp.messages[0]._id;
+		
+		that.refresher = setInterval(function(){
+		that.refresh();
+		},15000); //15 sec polling
+
+	});
+	
+};
+
+
+Environnement.prototype._prependMsg = function(messages){
+		var template = Handlebars.compile($("#message_template").html());
+		var box = $("#message_list");
+
+		if(messages._id !== undefined){
+			this.messages.push(messages);
+			box.prepend(template(messages));
+		}
+		else /* if messages is a single object & not an array*/
+		{
+			for(var i=messages.length-1;i>=0;i--){
+				this.messages.push(messages[i]);
+				box.prepend(template(messages[i]));	
+			}
+		}
 };
 
 
 /* Sets the DOM to "connected" context */	
-Environnement.prototype._connectContext = function(){
+Environnement.prototype._connectContext = function(user){
+	this.userConnected = user
 	this.context = "connected";
 	var postId = $("#content_form");
 	var loginId = $("#login");
