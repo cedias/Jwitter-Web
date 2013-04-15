@@ -35,13 +35,13 @@ Environnement.prototype.refresh = function() {
 	}
 };
 
-Environnement.prototype.switchContext = function(){
+Environnement.prototype.switchContext = function(user){
 	
 	if(this.context ===  "connected"){
 		this._disconnectContext();
 	}
 	else if(this.context === "disconnected"){
-		this._connectContext();
+		this._connectContext(user);
 	}
 };
 
@@ -78,7 +78,8 @@ Environnement.prototype._prependMsg = function(messages){
 
 
 /* Sets the DOM to "connected" context */	
-Environnement.prototype._connectContext = function(){
+Environnement.prototype._connectContext = function(user){
+	this.userConnected = user
 	this.context = "connected";
 	var postId = $("#content_form");
 	var loginId = $("#login");

@@ -1,11 +1,11 @@
 
-var env;
+
 $(function() {
 
 	/*----------------
 	* Page  Variables |
 	* ---------------*/
-	
+	var env;
 
 
 
@@ -61,7 +61,7 @@ $(function() {
 
 	 		if(!resp.error_code){
 	 			var user = new User(resp.login,resp.id,resp.key,false);
-	 			env = new Environnement(user);
+	 			env.switchContext(user);
 	 			createCookie("JwitterAuth", JSON.stringify(user) , 1);
 	 		}
 	 		else
@@ -79,7 +79,7 @@ $(function() {
 
 	 $("#logout").on("submit", function(){
 
-	 	env = new Environnement();
+	 	env.switchContext();
 	 	eraseCookie("JwitterAuth");
 	 	return false; // deactivate page refresh 
 	 });
