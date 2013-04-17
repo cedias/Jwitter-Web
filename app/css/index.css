@@ -159,7 +159,7 @@ width: 55px;
 	min-width: 557px;
 }
 
-#messages {
+#messages,.inner_box {
 	width: 97%;
 	margin :auto;
 	border: 1px solid #e8e8e8;
@@ -201,4 +201,36 @@ width: 55px;
  #footer > p 
  {
  	text-align: center;
+ }
+
+ #user_info
+ {
+
+ 	border-radius: 5px;
+ 	width: 350px;
+ 	position: fixed;
+ 	top: 20%;
+ 	left: 5%;
+ }
+ #user_info h2 {
+ 	font-size: 44px;
+ 	color: #00DFFC;
+ 	margin-left: 5%;
+ 	margin-bottom: 0px;
+ }
+  #friend_count {
+ 	position: absolute;
+ 	font-size: 44px;
+ 	color:black;
+ 	right: 10%;
+ }
+
+ #user_info h3 {
+ 	margin-left: 81%;
+ 	position: relative;
+ 	margin-top: -10px;
+ }
+
+ #user_info h4 {
+ 	margin-left: 5%;
  }

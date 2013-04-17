@@ -110,10 +110,33 @@
 			<p class="message_text">
 				{{ message }}
 			</p>
-			<span class="message_info"> <a href="#">{{ login }}</a> posted on <b> {{ date }}</b>
+			<span class="message_info"> <a >{{ login }}</a> posted on <b> {{ date }}</b>
 			</span>
 		</div>
 	</script>
+
+	<script id="info_template" type="text/x-handlebars-template">
+		<div id="user_info" class="content_background">
+			<div class="inner_box">
+				<h2>{{ login }} <span id="friend_count"> {{ friend_count }} </span></h2>
+				<h3 > friends</h3>
+
+				<div id="last_jweets">
+					<h4>Last Jweets</h4>
+					{{#each last_jweets.messages}}
+						<div class="message">
+						<p class="message_text">
+							{{ message }}
+						</p>
+						<span class="message_info"> <a href="#">{{ login }}</a> posted on <b> {{ date }}</b>
+						</span>
+						</div>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</script>
+
 	
 </body>
 

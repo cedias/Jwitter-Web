@@ -24,6 +24,8 @@ $(function() {
 		{
 			env = new Environnement();	
 		}
+
+
 			
 
 	/*--------------------Utilities----------------------------------*/
@@ -112,6 +114,11 @@ $(function() {
 
 	 	alert('not implemented');
 	 	return false;// deactivate page refresh 
+	 });
+
+	 /*------------Click User Name   ----------------*/
+	 $(".message_info").on("Click",function(){
+	 	alert("clicked");
 	 });
 
 

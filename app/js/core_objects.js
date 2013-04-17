@@ -64,20 +64,42 @@ Environnement.prototype._init = function() {
 Environnement.prototype._prependMsg = function(messages){
 		var template = Handlebars.compile($("#message_template").html());
 		var box = $("#message_list");
+		var node;
+		var that = this;
 
 		if(messages._id !== undefined){
 			this.messages.push(messages);
-			box.prepend(template(messages));
+			node = template(messages);
+			box.prepend(node);
 		}
 		else /* if messages is a single object & not an array*/
 		{
 			for(var i=messages.length-1;i>=0;i--){
 				this.messages.push(messages[i]);
-				box.prepend(template(messages[i]));	
+				node = template(messages[i]);
+				box.prepend(node);
 			}
 		}
+
+		$(".message_info>a").on("click",function(){
+			var index = $(this.parentNode.parentNode).index();
+			var length = that.messages.length;
+			var msgClicked = that.messages[length-1-index];
+
+			that._showInfo(msgClicked.id);
+		});
 };
 
+/* Shows the info of a user*/
+Environnement.prototype._showInfo = function(userId) {
+	$("#user_info").remove();
+	var key = (this.userConnected !== undefined)?this.userConnected.key:"";
+	Jwitter.info(key,userId,function(resp){
+		console.log(resp);
+		var template = Handlebars.compile($("#info_template").html());
+		$("body").prepend(template(resp));
+	});
+};
 
 /* Sets the DOM to "connected" context */	
 Environnement.prototype._connectContext = function(user){
