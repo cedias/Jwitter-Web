@@ -232,5 +232,44 @@ width: 55px;
  }
 
  #user_info h4 {
+ 	margin-top: 5%;
  	margin-left: 5%;
  }
+
+#add_friend_button {
+	margin-top: 5%;
+	margin-bottom: 5%;
+	margin-left: 5%;
+	padding-left: 5%;
+	padding-right: 5%;
+	border: 2px solid #00DFFC;
+	background-color: #00DFFC;
+	color: #FFFFFF;
+	border-radius: 5px ;
+	font-weight: bolder;
+	font-size: 20px;
+}
+
+#add_friend_button:hover{
+	background-color: #0FEEFF;
+	cursor: pointer;
+}
+
+#remove_friend_button {
+	margin-top: 5%;
+	margin-bottom: 5%;
+	margin-left: 5%;
+	padding-left: 5%;
+	padding-right: 5%;
+	border: 2px solid #f02b2b;
+	background-color: #f02b2b;
+	color: #FFFFFF;
+	border-radius: 5px ;
+	font-weight: bolder;
+	font-size: 20px;
+}
+
+#remove_friend_button:hover{
+	background-color: #fa5252;
+	cursor: pointer;
+}

@@ -43,6 +43,8 @@ Environnement.prototype.switchContext = function(user){
 	else if(this.context === "disconnected"){
 		this._connectContext(user);
 	}
+
+	$("#user_info").remove(); //Eventually delete user info window
 };
 
 Environnement.prototype._init = function() {
@@ -80,7 +82,10 @@ Environnement.prototype._prependMsg = function(messages){
 				box.prepend(node);
 			}
 		}
+		//delete old event Listeners
+		$(".message_info>a").off("click");
 
+		//append new ones
 		$(".message_info>a").on("click",function(){
 			var index = $(this.parentNode.parentNode).index();
 			var length = that.messages.length;
@@ -92,13 +97,57 @@ Environnement.prototype._prependMsg = function(messages){
 
 /* Shows the info of a user*/
 Environnement.prototype._showInfo = function(userId) {
-	$("#user_info").remove();
+	$("#user_info").remove(); //delete old one if there
 	var key = (this.userConnected !== undefined)?this.userConnected.key:"";
+	var that = this;
+
 	Jwitter.info(key,userId,function(resp){
-		console.log(resp);
+		var info = resp;
+
+		if(info.friend_with !== undefined){
+			/*Conditions to show friend buttons*/
+			info.friend_with = (info.friend_with === "no")?false:true;
+			info.connected = (info.login !== that.userConnected.login)?true:false;
+		}
 		var template = Handlebars.compile($("#info_template").html());
-		$("body").prepend(template(resp));
+		$("body").prepend(template(info));
+		that._bindUserInfoButtons(info);
 	});
+};
+
+Environnement.prototype._bindUserInfoButtons = function(info) {
+	var removeFriend = $("#remove_friend_button");
+	var addFriend = $("#add_friend_button");
+	var key = this.userConnected.key;
+	var that = this
+	var fid = info.id
+	console.log("bind");
+	console.log(info);
+	console.log(key);
+
+	if(info.friend_with){
+		/*is friend*/
+		removeFriend.on("click",function(){
+
+			Jwitter.removeFriend(key,fid,function(resp){
+				if(resp.error_code){
+					alert(resp.message);
+				}
+			});
+			that._showInfo(fid); //refresh box
+		});
+	}
+	else
+	{
+		addFriend.on("click",function(){
+			Jwitter.addFriend(key,fid,function(resp){
+				if(resp.error_code){
+					alert(resp.message);
+				}
+			});
+			that._showInfo(fid); //refresh box
+		});
+	}
 };
 
 /* Sets the DOM to "connected" context */	

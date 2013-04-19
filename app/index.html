@@ -120,7 +120,15 @@
 			<div class="inner_box">
 				<h2>{{ login }} <span id="friend_count"> {{ friend_count }} </span></h2>
 				<h3 > friends</h3>
-
+				{{#if connected }}
+				<div id="add_friend">
+					{{#if friend_with }}
+					<a id="remove_friend_button"> Remove from friends <a/>
+					{{else}}
+					<a id="add_friend_button"> Add to friends <a/>
+					{{/if}}
+				</div>
+				{{/if}}
 				<div id="last_jweets">
 					<h4>Last Jweets</h4>
 					{{#each last_jweets.messages}}

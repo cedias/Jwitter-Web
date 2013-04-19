@@ -116,10 +116,9 @@ $(function() {
 	 	return false;// deactivate page refresh 
 	 });
 
-	 /*------------Click User Name   ----------------*/
-	 $(".message_info").on("Click",function(){
-	 	alert("clicked");
+	  /*----------Hide User Info on out-click--------*/
+	  $("#container").on("click",function(){
+	 	$("#user_info").remove(); 
 	 });
-
 
 });
