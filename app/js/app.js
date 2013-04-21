@@ -24,6 +24,8 @@ $(function() {
 		{
 			env = new Environnement();	
 		}
+
+
 			
 
 	/*--------------------Utilities----------------------------------*/
@@ -114,5 +116,9 @@ $(function() {
 	 	return false;// deactivate page refresh 
 	 });
 
+	  /*----------Hide User Info on out-click--------*/
+	  $("#container").on("click",function(){
+	 	$("#user_info").remove(); 
+	 });
 
 });

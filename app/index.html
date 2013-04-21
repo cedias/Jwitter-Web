@@ -110,10 +110,41 @@
 			<p class="message_text">
 				{{ message }}
 			</p>
-			<span class="message_info"> <a href="#">{{ login }}</a> posted on <b> {{ date }}</b>
+			<span class="message_info"> <a >{{ login }}</a> posted on <b> {{ date }}</b>
 			</span>
 		</div>
 	</script>
+
+	<script id="info_template" type="text/x-handlebars-template">
+		<div id="user_info" class="content_background">
+			<div class="inner_box">
+				<h2>{{ login }} <span id="friend_count"> {{ friend_count }} </span></h2>
+				<h3 > friends</h3>
+				{{#if connected }}
+				<div id="add_friend">
+					{{#if friend_with }}
+					<a id="remove_friend_button"> Remove from friends <a/>
+					{{else}}
+					<a id="add_friend_button"> Add to friends <a/>
+					{{/if}}
+				</div>
+				{{/if}}
+				<div id="last_jweets">
+					<h4>Last Jweets</h4>
+					{{#each last_jweets.messages}}
+						<div class="message">
+						<p class="message_text">
+							{{ message }}
+						</p>
+						<span class="message_info"> <a href="#">{{ login }}</a> posted on <b> {{ date }}</b>
+						</span>
+						</div>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</script>
+
 	
 </body>
 

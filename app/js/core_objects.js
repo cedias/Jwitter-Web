@@ -43,6 +43,8 @@ Environnement.prototype.switchContext = function(user){
 	else if(this.context === "disconnected"){
 		this._connectContext(user);
 	}
+
+	$("#user_info").remove(); //Eventually delete user info window
 };
 
 Environnement.prototype._init = function() {
@@ -64,20 +66,96 @@ Environnement.prototype._init = function() {
 Environnement.prototype._prependMsg = function(messages){
 		var template = Handlebars.compile($("#message_template").html());
 		var box = $("#message_list");
+		var node;
+		var that = this;
 
 		if(messages._id !== undefined){
 			this.messages.push(messages);
-			box.prepend(template(messages));
+			node = template(messages);
+			box.prepend(node);
 		}
 		else /* if messages is a single object & not an array*/
 		{
 			for(var i=messages.length-1;i>=0;i--){
 				this.messages.push(messages[i]);
-				box.prepend(template(messages[i]));	
+				node = template(messages[i]);
+				box.prepend(node);
 			}
 		}
+		//delete old event Listeners
+		$(".message_info>a").off("click");
+
+		//append new ones
+		$(".message_info>a").on("click",function(){
+			var index = $(this.parentNode.parentNode).index();
+			var length = that.messages.length;
+			var msgClicked = that.messages[length-1-index];
+
+			that._showInfo(msgClicked.id);
+		});
 };
 
+/* Shows the info of a user*/
+Environnement.prototype._showInfo = function(userId) {
+	$("#user_info").remove(); //delete old one if there
+	var key = (this.userConnected !== undefined)?this.userConnected.key:"";
+	var that = this;
+
+	Jwitter.info(key,userId,function(resp){
+		var info = resp;
+
+		if(info.friend_with !== undefined){
+			/*Conditions to show friend buttons*/
+			info.friend_with = (info.friend_with === "no")?false:true;
+			info.connected = (info.login !== that.userConnected.login)?true:false;
+		}
+		/*If messages is a single object and not an array*/
+		if(!jQuery.isArray(info.last_jweets.messages)){
+				var temp = info.last_jweets.messages
+				info.last_jweets.messages = [];
+				info.last_jweets.messages.push(temp);
+		}
+		console.log(info);
+
+		var template = Handlebars.compile($("#info_template").html());
+		$("body").prepend(template(info));
+
+		if(key !== "")
+			that._bindUserInfoButtons(info);
+	});
+};
+
+Environnement.prototype._bindUserInfoButtons = function(info) {
+	var removeFriend = $("#remove_friend_button");
+	var addFriend = $("#add_friend_button");
+	var key = this.userConnected.key;
+	var that = this
+	var fid = info.id
+
+	if(info.friend_with){
+		/*is friend*/
+		removeFriend.on("click",function(){
+
+			Jwitter.removeFriend(key,fid,function(resp){
+				if(resp.error_code){
+					alert(resp.message);
+				}
+			});
+			that._showInfo(fid); //refresh box
+		});
+	}
+	else
+	{
+		addFriend.on("click",function(){
+			Jwitter.addFriend(key,fid,function(resp){
+				if(resp.error_code){
+					alert(resp.message);
+				}
+			});
+			that._showInfo(fid); //refresh box
+		});
+	}
+};
 
 /* Sets the DOM to "connected" context */	
 Environnement.prototype._connectContext = function(user){
