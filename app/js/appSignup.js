@@ -26,9 +26,9 @@
 		var lastName = $("#last_name").val();
 		var login = $("#login").val();
 		var password = $("#password").val();
-		var password = $("#password2").val();
+		var password2 = $("#password2").val();
 
-		if(firstName === "" || lastName === "" || login === "" || password === "")
+		if(firstName === "" || lastName === "" || login === "" || password === "" || password2 === "")
 		{
 			showError("Please fill all the fields");
 			return false;
@@ -38,7 +38,6 @@
 			showError("You haven't typed the same password !");
 			return false;
 		}
-
 
 		Jwitter.signup(firstName,lastName,login,password,function(resp){
 			console.log(resp);
