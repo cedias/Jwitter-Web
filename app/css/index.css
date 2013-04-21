@@ -159,7 +159,7 @@ width: 55px;
 	min-width: 557px;
 }
 
-#messages {
+#messages,.inner_box {
 	width: 97%;
 	margin :auto;
 	border: 1px solid #e8e8e8;
@@ -202,3 +202,74 @@ width: 55px;
  {
  	text-align: center;
  }
+
+ #user_info
+ {
+
+ 	border-radius: 5px;
+ 	width: 350px;
+ 	position: fixed;
+ 	top: 20%;
+ 	left: 5%;
+ }
+ #user_info h2 {
+ 	font-size: 44px;
+ 	color: #00DFFC;
+ 	margin-left: 5%;
+ 	margin-bottom: 0px;
+ }
+  #friend_count {
+ 	position: absolute;
+ 	font-size: 44px;
+ 	color:black;
+ 	right: 10%;
+ }
+
+ #user_info h3 {
+ 	margin-left: 81%;
+ 	position: relative;
+ 	margin-top: -10px;
+ }
+
+ #user_info h4 {
+ 	margin-top: 5%;
+ 	margin-left: 5%;
+ }
+
+#add_friend_button {
+	margin-top: 5%;
+	margin-bottom: 5%;
+	margin-left: 5%;
+	padding-left: 5%;
+	padding-right: 5%;
+	border: 2px solid #00DFFC;
+	background-color: #00DFFC;
+	color: #FFFFFF;
+	border-radius: 5px ;
+	font-weight: bolder;
+	font-size: 20px;
+}
+
+#add_friend_button:hover{
+	background-color: #0FEEFF;
+	cursor: pointer;
+}
+
+#remove_friend_button {
+	margin-top: 5%;
+	margin-bottom: 5%;
+	margin-left: 5%;
+	padding-left: 5%;
+	padding-right: 5%;
+	border: 2px solid #f02b2b;
+	background-color: #f02b2b;
+	color: #FFFFFF;
+	border-radius: 5px ;
+	font-weight: bolder;
+	font-size: 20px;
+}
+
+#remove_friend_button:hover{
+	background-color: #fa5252;
+	cursor: pointer;
+}
