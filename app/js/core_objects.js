@@ -109,9 +109,19 @@ Environnement.prototype._showInfo = function(userId) {
 			info.friend_with = (info.friend_with === "no")?false:true;
 			info.connected = (info.login !== that.userConnected.login)?true:false;
 		}
+		/*If messages is a single object and not an array*/
+		if(!jQuery.isArray(info.last_jweets.messages)){
+				var temp = info.last_jweets.messages
+				info.last_jweets.messages = [];
+				info.last_jweets.messages.push(temp);
+		}
+		console.log(info);
+
 		var template = Handlebars.compile($("#info_template").html());
 		$("body").prepend(template(info));
-		that._bindUserInfoButtons(info);
+
+		if(key !== "")
+			that._bindUserInfoButtons(info);
 	});
 };
 
@@ -121,9 +131,6 @@ Environnement.prototype._bindUserInfoButtons = function(info) {
 	var key = this.userConnected.key;
 	var that = this
 	var fid = info.id
-	console.log("bind");
-	console.log(info);
-	console.log(key);
 
 	if(info.friend_with){
 		/*is friend*/
