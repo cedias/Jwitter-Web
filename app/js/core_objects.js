@@ -140,7 +140,7 @@ Environnement.prototype._bindMsgEvents = function() {
 							Jwitter.deletePost(that.userConnected.key,msgClicked._id,function(){
 								that.messages.remove(length-1-index);
 								if(index === 0)
-									that.lastReceived= that.messages[length-2];
+									that.lastReceived= that.messages[length-2]._id;
 								msgBox.remove();
 							});
 						});						
