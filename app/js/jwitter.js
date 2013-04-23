@@ -52,6 +52,11 @@ Jwitter.info = function(key,id,callback){
 	Jwitter._get(url,callback);
 };
 
+Jwitter.deletePost = function(key,mid,callback){
+	var url = baseUrl+"/message/delete?key="+key+"&mid="+mid;
+	Jwitter._get(url,callback);
+};
+
 Jwitter._get = function(url,callback){
 	var jqxhr = $.ajax(url)
 	
