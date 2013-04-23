@@ -76,6 +76,10 @@ Environnement.prototype._prependMsg = function(messages){
 		var node;
 		var that = this;
 
+		/*no messages on server or error comms*/
+		if(messages === undefined) 
+			return;
+
 		/* if messages is a single object & not an array*/
 		if(messages._id !== undefined){
 			this.messages.push(messages);
