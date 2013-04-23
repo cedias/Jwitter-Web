@@ -1,3 +1,10 @@
+/*tweaks*/
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
 
 /*Environnement*/
 
@@ -69,23 +76,37 @@ Environnement.prototype._prependMsg = function(messages){
 		var node;
 		var that = this;
 
+		/* if messages is a single object & not an array*/
 		if(messages._id !== undefined){
 			this.messages.push(messages);
 			node = template(messages);
 			box.prepend(node);
 		}
-		else /* if messages is a single object & not an array*/
+		else 
 		{
+			/* if messages is an array */
 			for(var i=messages.length-1;i>=0;i--){
 				this.messages.push(messages[i]);
 				node = template(messages[i]);
 				box.prepend(node);
 			}
 		}
+		this._bindMsgEvents();
+};
+
+/* Binds the events on messages*/
+Environnement.prototype._bindMsgEvents = function() {
+	var that = this;
+	var key = (this.userConnected !== undefined)?this.userConnected.key:"";
 		//delete old event Listeners
 		$(".message_info>a").off("click");
+		$(".message").off("click");
+
+
 
 		//append new ones
+
+		/*Show user info*/
 		$(".message_info>a").on("click",function(){
 			var index = $(this.parentNode.parentNode).index();
 			var length = that.messages.length;
@@ -93,6 +114,36 @@ Environnement.prototype._prependMsg = function(messages){
 
 			that._showInfo(msgClicked.id);
 		});
+
+		/*delete messages*/
+		if(key!="") {
+			$(".message").on("click",function(){
+				var msgBox = $(this);
+				var index = msgBox.index();
+				var length = that.messages.length;
+				var msgClicked = that.messages[length-1-index];
+				
+
+				if(msgClicked.login === that.userConnected.login){
+					if(msgBox[0].children[0].className!=="delete"){
+						/*No Delete button*/
+						msgBox.prepend("<p class=\"delete\" >DELETE</p>");
+						console.log(msgClicked);
+						$(".delete").on("click",function(){
+							Jwitter.deletePost(that.userConnected.key,msgClicked._id,function(){
+								that.messages.remove(length-1-index);
+								msgBox.remove();
+							});
+						});						
+					}else
+					{
+						$(".delete").off("click");
+						msgBox.children().remove(".delete");
+					}
+				}
+
+			});
+		}
 };
 
 /* Shows the info of a user*/
