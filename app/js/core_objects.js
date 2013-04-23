@@ -51,6 +51,7 @@ Environnement.prototype.switchContext = function(user){
 		this._connectContext(user);
 	}
 
+	this._bindMsgEvents();
 	$("#user_info").remove(); //Eventually delete user info window
 };
 
