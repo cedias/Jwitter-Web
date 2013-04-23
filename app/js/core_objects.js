@@ -58,8 +58,12 @@ Environnement.prototype._init = function() {
 	var that = this;
 
 	Jwitter.listAll(function(resp){
-		that._prependMsg(resp.messages);
-		that.lastReceived = resp.messages[0]._id;
+
+		/*if no messages*/
+		if(messages !== undefined){
+			that._prependMsg(resp.messages);
+			that.lastReceived = resp.messages[0]._id;
+		}
 		
 		that.refresher = setInterval(function(){
 		that.refresh();
