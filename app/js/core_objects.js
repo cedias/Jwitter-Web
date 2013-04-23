@@ -139,6 +139,8 @@ Environnement.prototype._bindMsgEvents = function() {
 						$(".delete").on("click",function(){
 							Jwitter.deletePost(that.userConnected.key,msgClicked._id,function(){
 								that.messages.remove(length-1-index);
+								if(index === 0)
+									that.lastReceived= that.messages[length-2];
 								msgBox.remove();
 							});
 						});						
