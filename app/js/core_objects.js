@@ -53,6 +53,7 @@ Environnement.prototype.switchContext = function(user){
 
 	this._bindMsgEvents();
 	$("#user_info").remove(); //Eventually delete user info window
+	$(".delete").remove(); //and delete buttons
 };
 
 Environnement.prototype._init = function() {
