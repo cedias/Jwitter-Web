@@ -273,3 +273,21 @@ width: 55px;
 	background-color: #fa5252;
 	cursor: pointer;
 }
+
+.delete{
+	margin-top:5px; 
+	padding-left: 5%;
+	padding-right: 5%;
+	border: 2px solid #f02b2b;
+	background-color: #f02b2b;
+	color: #FFFFFF;
+	border-radius: 5px ;
+	font-weight: bolder;
+	font-size: 20px;
+	float:right;
+}
+
+.delete:hover{
+	background-color: #fa5252;
+	cursor: pointer;
+}
