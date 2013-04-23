@@ -233,7 +233,8 @@ Environnement.prototype._connectContext = function(user){
 
 
 /* Sets the DOM to "disconnected" context */	
-Environnement.prototype._disconnectContext = function(){	
+Environnement.prototype._disconnectContext = function(){
+	this.userConnected = undefined;	
 	this.context = "disconnected";
 	var postId = $("#content_form");
 	var loginId = $("#login");
