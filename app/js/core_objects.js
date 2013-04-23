@@ -60,7 +60,7 @@ Environnement.prototype._init = function() {
 	Jwitter.listAll(function(resp){
 
 		/*if no messages*/
-		if(messages !== undefined){
+		if(resp.messages !== undefined ){
 			that._prependMsg(resp.messages);
 			that.lastReceived = resp.messages[0]._id;
 		}
