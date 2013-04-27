@@ -1,13 +1,13 @@
 Jwitter-Web
 ===========
-Jwitter Webapp
+
+Jwitter Webapp is a full JS app to use with Jwitter, it was a class assignment.
 
 
-Tricks & Tips
-----------------
+    ----------------------------------------------------------------------------
+    "THE BEER-WARE LICENSE" (Revision 398): 
+    you can do whatever you want with this stuff. If we meet some day, and you think
+    this stuff is worth it, you can buy me a beer in return
+    ----------------------------------------------------------------------------
 
-1. Git clone this repository
-2. Switch to Jwitter-Web folder `cd Jwitter-Web`
-3. Run Chrome in developper mode to be able to do Cross Server AJAX ` chromium-browser --disable-web-security & `
-4. goto file:///~/Jwitter-Web/app/
-5. Hack
+
